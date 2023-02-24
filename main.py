@@ -16,7 +16,7 @@ class Calculator:
 
         self.total_expression = '0'
         self.current_expression = '0'
-        self.total_label = self.total_label()
+        self.total_label, self.label = self.create_display_labels()
         self.display_frame = self.create_display_frame()
         self.buttons_frame = self.create_buttons_frame()
 
@@ -28,6 +28,7 @@ class Calculator:
         label = tk.Label(self.display_frame, text=self.current_expression, anchor=tk.E, bg=GREY, fg=PRIMARY,
                                padx=24, font=LARGE_FONT)
         label.pack(expand=True, fill='both')
+        return total_label, label
 
     # CREATED FRAMES
     def create_display_frame(self):
