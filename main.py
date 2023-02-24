@@ -18,6 +18,11 @@ class Calculator:
         frame.pack(expand=True, fill='both')
         return frame
 
+    def create_buttons_frame(self):
+        frame = tk.Frame(self.window)
+        frame.pack(expand=True, fill='both')
+        return frame
+
     def run(self):
         self.window.mainloop()
 
