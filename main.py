@@ -13,6 +13,7 @@ class Calculator:
         self.display_frame = self.create_display_frame()
         self.buttons_frame = self.create_buttons_frame()
 
+    # CREATED FRAMES
     def create_display_frame(self):
         frame = tk.Frame(self.window, height=221, bg=GREY)
         frame.pack(expand=True, fill='both')
