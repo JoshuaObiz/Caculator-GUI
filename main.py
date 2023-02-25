@@ -4,7 +4,9 @@ PRIMARY = '#28cdfb'
 GREY = '#aaaeaf'
 LABEL_COLOR = '#0e1011'
 WHITE = '#ffffff'
+OFF_WHITE = '#f5f5f8'
 SMALL_FONT = ('Poppins', 16)
+DEFAULT_FONT = ('Poppins', 20)
 LARGE_FONT = ('Poppins', 32)
 DIGIT_FONT = ('Poppins', 24, 'bold')
 
@@ -30,6 +32,10 @@ class Calculator:
             '.': (4, 1), 0: (4, 2)
         }
         self.create_digit_buttons()
+        self.operations = {
+            '/': '\u00f7', '*': '\u00d7', '-': '-', '+': '+'
+        }
+        self.create_operator_buttons()
 
     # CREATED DISPLAY LABELS
     def create_display_labels(self):
@@ -41,17 +47,26 @@ class Calculator:
         label.pack(expand=True, fill='both')
         return total_label, label
 
-    # CREATED FRAMES
-    def create_display_frame(self):
-        frame = tk.Frame(self.window, height=221, bg=GREY)
-        frame.pack(expand=True, fill='both')
-        return frame
-
+    # CREATED DIGITS METHOD
     def create_digit_buttons(self):
         for digit, grid_value in self.digits.items():
             button = tk.Button(self.buttons_frame, text=str(digit), bg=WHITE, fg=LABEL_COLOR, font=DIGIT_FONT,
                                borderwidth=0)
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
+
+    def create_operator_buttons(self):
+        i = 0
+        for operator, symbol in self.operations.items():
+            button = tk.Button(self.buttons_frame, text=symbol, bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT,
+                               borderwidth=0)
+            button.grid(row=i, column=4, sticky=tk.NSEW)
+            i += 1
+
+    # CREATED FRAMES METHOD
+    def create_display_frame(self):
+        frame = tk.Frame(self.window, height=221, bg=GREY)
+        frame.pack(expand=True, fill='both')
+        return frame
 
     def create_buttons_frame(self):
         frame = tk.Frame(self.window)
