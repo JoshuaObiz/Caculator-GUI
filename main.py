@@ -6,6 +6,7 @@ LABEL_COLOR = '#0e1011'
 WHITE = '#ffffff'
 SMALL_FONT = ('Poppins', 16)
 LARGE_FONT = ('Poppins', 32)
+DIGIT_FONT = ('Poppins', 24, 'bold')
 
 
 class Calculator:
@@ -48,7 +49,8 @@ class Calculator:
 
     def create_digit_buttons(self):
         for digit, grid_value in self.digits.items():
-            button = tk.Button(self.buttons_frame, text=str(digit), bg=WHITE, fg=LABEL_COLOR)
+            button = tk.Button(self.buttons_frame, text=str(digit), bg=WHITE, fg=LABEL_COLOR, font=DIGIT_FONT,
+                               borderwidth=0)
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
 
     def create_buttons_frame(self):
