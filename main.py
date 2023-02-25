@@ -18,8 +18,8 @@ class Calculator:
         self.window.resizable(None, None)
         self.window.title("GUI Calculator")
 
-        self.total_expression = '0'
-        self.current_expression = '0'
+        self.total_expression = ''
+        self.current_expression = ''
         self.display_frame = self.create_display_frame()
         self.buttons_frame = self.create_buttons_frame()
         self.total_label, self.label = self.create_display_labels()
@@ -53,11 +53,11 @@ class Calculator:
         label.pack(expand=True, fill='both')
         return total_label, label
 
-    # CREATED DIGITS METHOD
+    # CREATED DIGITS
     def create_digit_buttons(self):
         for digit, grid_value in self.digits.items():
             button = tk.Button(self.buttons_frame, text=str(digit), bg=WHITE, fg=LABEL_COLOR, font=DIGIT_FONT,
-                               borderwidth=0)
+                               borderwidth=0, command=lambda x=digit: self.add_to_expression(x))
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
 
     # CREATED OPERATORS
@@ -65,7 +65,7 @@ class Calculator:
         i = 0
         for operator, symbol in self.operations.items():
             button = tk.Button(self.buttons_frame, text=symbol, bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT,
-                               borderwidth=0)
+                               borderwidth=0, command=lambda x=operator: self.append_operator(x))
             button.grid(row=i, column=4, sticky=tk.NSEW)
             i += 1
 
@@ -94,7 +94,12 @@ class Calculator:
         frame.pack(expand=True, fill='both')
         return frame
 
-    # UPDATED LABELS
+    # EXPRESSION FUNCTIONS
+    def add_to_expression(self, value):
+        self.current_expression += str(value)
+        self.update_label()
+
+    # UPDATE LABELS
     def update_total_labels(self):
         self.total_label.config(text=self.total_expression)
 
@@ -103,6 +108,14 @@ class Calculator:
 
     def run(self):
         self.window.mainloop()
+
+    # OPERATOR FUNCTION
+    def append_operator(self, operator):
+        self.current_expression += operator
+        self.total_expression += self.current_expression
+        self.current_expression = ''
+        self.update_total_labels()
+        self.update_label()
 
 
 if __name__ == '__main__':
