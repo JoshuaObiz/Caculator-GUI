@@ -40,6 +40,7 @@ class Calculator:
         self.create_operator_buttons()
         self.create_clear_button()
         self.create_equals_button()
+        self.create_special_buttons()
 
     # CREATED DISPLAY LABELS
     def create_display_labels(self):
@@ -77,6 +78,9 @@ class Calculator:
                            borderwidth=0)
         button.grid(row=4, column=3, sticky=tk.NSEW, columnspan=2)
 
+    def create_special_buttons(self):
+        self.create_equals_button()
+        self.create_clear_button()
     # CREATED FRAMES METHOD
     def create_display_frame(self):
         frame = tk.Frame(self.window, height=221, bg=GREY)
