@@ -60,7 +60,7 @@ class Calculator:
                                borderwidth=0)
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
 
-    # CREATED OPERATOR METHOD
+    # CREATED OPERATORS
     def create_operator_buttons(self):
         i = 0
         for operator, symbol in self.operations.items():
@@ -83,7 +83,7 @@ class Calculator:
         self.create_equals_button()
         self.create_clear_button()
 
-    # CREATED FRAMES METHOD
+    # CREATED FRAMES
     def create_display_frame(self):
         frame = tk.Frame(self.window, height=221, bg=GREY)
         frame.pack(expand=True, fill='both')
@@ -93,6 +93,13 @@ class Calculator:
         frame = tk.Frame(self.window)
         frame.pack(expand=True, fill='both')
         return frame
+
+    # UPDATED LABELS
+    def update_total_labels(self):
+        self.total_label.config(text=self.total_expression)
+
+    def update_label(self):
+        self.label.config(text=self.current_expression)
 
     def run(self):
         self.window.mainloop()
