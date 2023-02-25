@@ -76,7 +76,7 @@ class Calculator:
 
     def create_equals_button(self):
         button = tk.Button(self.buttons_frame, text='=', bg=PRIMARY, fg=LABEL_COLOR, font=DEFAULT_FONT,
-                           borderwidth=0)
+                           borderwidth=0, command=self.evaluate)
         button.grid(row=4, column=3, sticky=tk.NSEW, columnspan=2)
 
     def create_special_buttons(self):
@@ -101,9 +101,6 @@ class Calculator:
     def update_label(self):
         self.label.config(text=self.current_expression)
 
-    def run(self):
-        self.window.mainloop()
-
     # EXPRESSION FUNCTIONS
     def add_to_expression(self, value):
         self.current_expression += str(value)
@@ -123,6 +120,17 @@ class Calculator:
         self.total_expression = ''
         self.update_total_labels()
         self.update_label()
+
+    #     EVALUATE FUNCTION
+    def evaluate(self):
+        self.total_expression += self.current_expression
+        self.update_total_labels()
+        self.current_expression = str(eval(self.total_expression))
+        self.total_expression = ''
+        self.update_label()
+
+    def run(self):
+        self.window.mainloop()
 
 
 if __name__ == '__main__':
