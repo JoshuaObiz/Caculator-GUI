@@ -1,6 +1,6 @@
 import tkinter as tk
 
-PRIMARY = '#28cdfb'
+PRIMARY = '#f5f5f5'
 GREY = '#aaaeaf'
 LABEL_COLOR = '#0e1011'
 WHITE = '#ffffff'
@@ -23,17 +23,18 @@ class Calculator:
         self.display_frame = self.create_display_frame()
         self.buttons_frame = self.create_buttons_frame()
         self.total_label, self.label = self.create_display_labels()
-
-        # CREATED DIGITS
         self.digits = {
             7: (1, 1), 8: (1, 2), 9: (1, 3),
             4: (2, 1), 5: (2, 2), 6: (2, 3),
             1: (3, 1), 2: (3, 2), 3: (3, 3),
             '.': (4, 1), 0: (4, 2)
         }
-        self.create_digit_buttons()
+        self.buttons_frame.rowconfigure(0, weight=1)
+        for x in range(1, 5):
+            self.buttons_frame.rowconfigure(x, weight=1)
+            self.buttons_frame.columnconfigure(x, weight=1)
 
-        # CREATED OPERATIONS
+        self.create_digit_buttons()
         self.operations = {
             '/': '\u00f7', '*': '\u00d7', '-': '-', '+': '+'
         }
@@ -81,6 +82,7 @@ class Calculator:
     def create_special_buttons(self):
         self.create_equals_button()
         self.create_clear_button()
+
     # CREATED FRAMES METHOD
     def create_display_frame(self):
         frame = tk.Frame(self.window, height=221, bg=GREY)
