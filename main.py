@@ -32,10 +32,14 @@ class Calculator:
             '.': (4, 1), 0: (4, 2)
         }
         self.create_digit_buttons()
+
+        # CREATED OPERATIONS
         self.operations = {
             '/': '\u00f7', '*': '\u00d7', '-': '-', '+': '+'
         }
         self.create_operator_buttons()
+        self.create_clear_button()
+        self.create_equals_button()
 
     # CREATED DISPLAY LABELS
     def create_display_labels(self):
@@ -54,6 +58,7 @@ class Calculator:
                                borderwidth=0)
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
 
+    # CREATED OPERATOR METHOD
     def create_operator_buttons(self):
         i = 0
         for operator, symbol in self.operations.items():
@@ -61,6 +66,16 @@ class Calculator:
                                borderwidth=0)
             button.grid(row=i, column=4, sticky=tk.NSEW)
             i += 1
+
+    def create_clear_button(self):
+        button = tk.Button(self.buttons_frame, text='C', bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT,
+                           borderwidth=0)
+        button.grid(row=0, column=1, sticky=tk.NSEW, columnspan=3)
+
+    def create_equals_button(self):
+        button = tk.Button(self.buttons_frame, text='=', bg=PRIMARY, fg=LABEL_COLOR, font=DEFAULT_FONT,
+                           borderwidth=0)
+        button.grid(row=4, column=3, sticky=tk.NSEW, columnspan=2)
 
     # CREATED FRAMES METHOD
     def create_display_frame(self):
