@@ -42,6 +42,17 @@ class Calculator:
         self.create_clear_button()
         self.create_equals_button()
         self.create_special_buttons()
+        
+    # CREATED FRAMES
+    def create_display_frame(self):
+        frame = tk.Frame(self.window, height=221, bg=GREY)
+        frame.pack(expand=True, fill='both')
+        return frame
+
+    def create_buttons_frame(self):
+        frame = tk.Frame(self.window)
+        frame.pack(expand=True, fill='both')
+        return frame
 
     # CREATED DISPLAY LABELS
     def create_display_labels(self):
@@ -82,17 +93,6 @@ class Calculator:
     def create_special_buttons(self):
         self.create_equals_button()
         self.create_clear_button()
-
-    # CREATED FRAMES
-    def create_display_frame(self):
-        frame = tk.Frame(self.window, height=221, bg=GREY)
-        frame.pack(expand=True, fill='both')
-        return frame
-
-    def create_buttons_frame(self):
-        frame = tk.Frame(self.window)
-        frame.pack(expand=True, fill='both')
-        return frame
 
     # UPDATE LABELS
     def update_total_labels(self):
