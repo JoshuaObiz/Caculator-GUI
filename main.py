@@ -2,7 +2,7 @@ import tkinter as tk
 
 PRIMARY = '#28cdfb'
 GREY = '#aaaeaf'
-LABEL_COLOR = '#aaaeaf'
+LABEL_COLOR = '#0e1011'
 SMALL_FONT = ('Poppins', 16)
 LARGE_FONT = ('Poppins', 32)
 
@@ -22,10 +22,10 @@ class Calculator:
 
     # CREATED DISPLAY LABELS
     def create_display_labels(self):
-        total_label = tk.Label(self.display_frame, text=self.total_expression, anchor=tk.E, bg=GREY, fg=PRIMARY,
+        total_label = tk.Label(self.display_frame, text=self.total_expression, anchor=tk.E, bg=GREY, fg=LABEL_COLOR,
                                padx=24, font=SMALL_FONT)
         total_label.pack(expand=True, fill='both')
-        label = tk.Label(self.display_frame, text=self.current_expression, anchor=tk.E, bg=GREY, fg=PRIMARY,
+        label = tk.Label(self.display_frame, text=self.current_expression, anchor=tk.E, bg=GREY, fg=LABEL_COLOR,
                                padx=24, font=LARGE_FONT)
         label.pack(expand=True, fill='both')
         return total_label, label
