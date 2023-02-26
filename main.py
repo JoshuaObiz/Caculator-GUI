@@ -44,7 +44,8 @@ class Calculator:
         self.create_clear_button()
         self.create_equals_button()
         self.create_special_buttons()
-        
+        self.bind_keys()
+
     # CREATED FRAMES
     def create_display_frame(self):
         frame = tk.Frame(self.window, height=221, bg=GREY)
@@ -115,6 +116,14 @@ class Calculator:
 
     def update_label(self):
         self.label.config(text=self.current_expression[:11])
+
+    def bind_keys(self):
+        self.window.bind('<Return>', lambda event: self.evaluate())
+        for key in self.digits:
+            self.window.bind(str(key), lambda event, digit=key: self.add_to_expression(digit))
+
+        for key in self.operations:
+            self.window.bind(str(key), lambda event, operator=key: self.add_to_expression(operator))
 
     # EXPRESSION FUNCTIONS
     def add_to_expression(self, value):
