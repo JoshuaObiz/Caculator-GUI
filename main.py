@@ -89,7 +89,7 @@ class Calculator:
 
     def create_square_root_button(self):
         button = tk.Button(self.buttons_frame, text='\u221ax', bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT,
-                           borderwidth=0, command=self.clear)
+                           borderwidth=0, command=self.square_root)
         button.grid(row=0, column=3, sticky=tk.NSEW)
 
     def create_clear_button(self):
@@ -108,10 +108,13 @@ class Calculator:
 
     # UPDATE LABELS
     def update_total_labels(self):
-        self.total_label.config(text=self.total_expression)
+        expression = self.total_expression
+        for operator, symbol in self.operations.items():
+            expression = expression.replace(operator, f'{symbol}')
+        self.total_label.config(text=expression)
 
     def update_label(self):
-        self.label.config(text=self.current_expression)
+        self.label.config(text=self.current_expression[:11])
 
     # EXPRESSION FUNCTIONS
     def add_to_expression(self, value):
@@ -147,9 +150,13 @@ class Calculator:
     def evaluate(self):
         self.total_expression += self.current_expression
         self.update_total_labels()
-        self.current_expression = str(eval(self.total_expression))
-        self.total_expression = ''
-        self.update_label()
+        try:
+            self.current_expression = str(eval(self.total_expression))
+            self.total_expression = ''
+        except Exception as e:
+            self.current_expression = 'Error'
+        finally:
+            self.update_label()
 
     def run(self):
         self.window.mainloop()
