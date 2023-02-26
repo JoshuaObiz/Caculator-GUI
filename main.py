@@ -39,6 +39,8 @@ class Calculator:
             '/': '\u00f7', '*': '\u00d7', '-': '-', '+': '+'
         }
         self.create_operator_buttons()
+        self.create_square_root_button()
+        self.create_square_button()
         self.create_clear_button()
         self.create_equals_button()
         self.create_special_buttons()
@@ -80,10 +82,20 @@ class Calculator:
             button.grid(row=i, column=4, sticky=tk.NSEW)
             i += 1
 
+    def create_square_button(self):
+        button = tk.Button(self.buttons_frame, text='x\u00b2', bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT,
+                           borderwidth=0, command=self.square)
+        button.grid(row=0, column=2, sticky=tk.NSEW)
+
+    def create_square_root_button(self):
+        button = tk.Button(self.buttons_frame, text='\u221ax', bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT,
+                           borderwidth=0, command=self.clear)
+        button.grid(row=0, column=3, sticky=tk.NSEW)
+
     def create_clear_button(self):
         button = tk.Button(self.buttons_frame, text='C', bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT,
                            borderwidth=0, command=self.clear)
-        button.grid(row=0, column=1, sticky=tk.NSEW, columnspan=3)
+        button.grid(row=0, column=1, sticky=tk.NSEW)
 
     def create_equals_button(self):
         button = tk.Button(self.buttons_frame, text='=', bg=PRIMARY, fg=LABEL_COLOR, font=DEFAULT_FONT,
@@ -112,6 +124,16 @@ class Calculator:
         self.total_expression += self.current_expression
         self.current_expression = ''
         self.update_total_labels()
+        self.update_label()
+
+    # SQUARE FUNCTION
+    def square(self):
+        self.current_expression = str(eval(f'{self.current_expression}**2'))
+        self.update_label()
+
+    # SQUARE ROOT FUNCTION
+    def square_root(self):
+        self.current_expression = str(eval(f'{self.current_expression}**0.5'))
         self.update_label()
 
     # CLEAR FUNCTION
